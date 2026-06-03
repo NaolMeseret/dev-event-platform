@@ -1,4 +1,5 @@
-import Hello from "../components/Hello"
+// import Hello from "../components/Hello"
+import Hello from "@/components/Hello"
 
 const Home = () => {
   console.log("server side log")
