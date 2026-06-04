@@ -1,23 +1,7 @@
 import EventCard from "@/components/EventCard"
 import ExploreBtn from "@/components/ExploreBtn"
-const events = [
-  {
-    image: "/images/event1.png",
-    title: "Event 1",
-    slug: "event-1",
-    loacation: "loaction-1",
-    date: "date-1",
-    time: "time-1",
-  },
-  {
-    image: "/images/event2.png",
-    title: "Event 2",
-    slug: "event-2",
-    loacation: "loaction-2",
-    date: "date-2",
-    time: "time-2",
-  },
-]
+import events from "@/lib/constants"
+
 const Home = () => {
   console.log("server side log")
   return (
