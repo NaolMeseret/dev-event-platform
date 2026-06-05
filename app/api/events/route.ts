@@ -103,3 +103,5 @@ export async function GET() {
     )
   }
 }
+
+//  a route that accepts a slug as input -> returns the event detail
