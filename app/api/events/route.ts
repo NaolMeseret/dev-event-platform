@@ -2,7 +2,15 @@ import connectDB from "@/lib/mongodb"
 import { v2 as cloudinary } from "cloudinary"
 import { NextRequest, NextResponse } from "next/server"
 import Event from "@/database/event.model"
-import { resolve } from "path"
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+console.log("cloud_name:", process.env.CLOUDINARY_CLOUD_NAME)
+console.log("api_key:", process.env.CLOUDINARY_API_KEY)
+console.log("api_secret exists:", !!process.env.CLOUDINARY_API_SECRET)
 export async function POST(req: NextRequest) {
   try {
     await connectDB()
@@ -40,7 +48,7 @@ export async function POST(req: NextRequest) {
         .upload_stream(
           {
             resource_type: "image",
-            folder: "DevEvent",
+            folder: "Dev-Event",
           },
           (error, results) => {
             if (error) return reject(error)
@@ -63,11 +71,11 @@ export async function POST(req: NextRequest) {
       },
     )
   } catch (e) {
-    console.error(e)
+    console.error("FULL ERROR:", e)
     return NextResponse.json(
       {
         message: "Event Creation Failed",
-        error: e instanceof Error ? e.message : "Unknown error",
+        error: e instanceof Error ? e.message : JSON.stringify(e),
       },
       { status: 500 },
     )
