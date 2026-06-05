@@ -8,9 +8,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
-console.log("cloud_name:", process.env.CLOUDINARY_CLOUD_NAME)
-console.log("api_key:", process.env.CLOUDINARY_API_KEY)
-console.log("api_secret exists:", !!process.env.CLOUDINARY_API_SECRET)
+
 export async function POST(req: NextRequest) {
   try {
     await connectDB()
@@ -78,6 +76,30 @@ export async function POST(req: NextRequest) {
         error: e instanceof Error ? e.message : JSON.stringify(e),
       },
       { status: 500 },
+    )
+  }
+}
+
+export async function GET() {
+  try {
+    await connectDB()
+    const events = await Event.find().sort({ createdAt: -1 })
+    return NextResponse.json(
+      {
+        message: "Events Fetched Successfully",
+        events,
+      },
+      { status: 200 },
+    )
+  } catch (e) {
+    return NextResponse.json(
+      {
+        message: "Event Fetching failed",
+        error: e,
+      },
+      {
+        status: 500,
+      },
     )
   }
 }
