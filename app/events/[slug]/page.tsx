@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import BookEvent from "@/components/BookEvent"
+import { getSimilarEventsBySlug } from "@/lib/actions/event.actions"
+import { IEvent } from "@/database"
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 const EventDetailsItem = ({
@@ -62,6 +64,7 @@ const EventDetailsPage = async ({
   } = await request.json()
   if (!description) return notFound()
   const bookings = 10
+  // const similarEvents: IEvent = getSimilarEventsBySlug(slug)
   return (
     <section id="event">
       <div className="header">
@@ -123,6 +126,9 @@ const EventDetailsPage = async ({
             <BookEvent />
           </div>
         </aside>
+      </div>
+      <div className="flex w-full flex-col gap-4 pt-20 ">
+        <h2>Simmilar Events</h2>
       </div>
     </section>
   )
