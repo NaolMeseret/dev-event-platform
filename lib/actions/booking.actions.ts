@@ -1,7 +1,7 @@
 "use server"
 
 import Booking from "@/database/booking.model"
-
+import { Types } from "mongoose"
 import connectDB from "@/lib/mongodb"
 
 export const createBooking = async ({
@@ -16,7 +16,9 @@ export const createBooking = async ({
   try {
     await connectDB()
 
-    await Booking.create({ eventId, slug, email })
+    // Convert eventId string to MongoDB ObjectId
+    const objectId = new Types.ObjectId(eventId)
+    await Booking.create({ eventId: objectId, email })
 
     return { success: true }
   } catch (e) {

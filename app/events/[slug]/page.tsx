@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import BookEvent from "@/components/BookEvent"
-import { getSimilarEventsBySlug } from "@/lib/actions/event.actions"
+import {
+  getSimilarEventsBySlug,
+  getEventBySlug,
+} from "@/lib/actions/event.actions"
 import { IEvent } from "@/database"
 import EventCard from "@/components/EventCard"
 import { cacheLife } from "next/cache"
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 const EventDetailsItem = ({
   icon,
@@ -49,27 +51,28 @@ const EventDetailsPage = async ({
   "use cache"
   cacheLife("hours")
   const { slug } = await params
-  const request = await fetch(`${BASE_URL}/api/events/${slug}
-    `)
-  const {
-    event: {
-      description,
-      image,
-      overview,
-      date,
-      time,
-      location,
-      mode,
-      agenda,
-      audience,
-      tags,
-      organizer,
-      _id,
-    },
-  } = await request.json()
-  // console.log(slug, _id)
+  const event = await getEventBySlug(slug)
 
-  if (!description) return notFound()
+  if (!event || !event.description) return notFound()
+
+  const {
+    description,
+    image,
+    overview,
+    date,
+    time,
+    location,
+    mode,
+    agenda,
+    audience,
+    tags,
+    organizer,
+    _id,
+  } = event
+
+  // Convert MongoDB ObjectId to string for client component
+  const eventId = _id.toString()
+
   const bookings = 10
   const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug)
   return (
@@ -130,7 +133,7 @@ const EventDetailsPage = async ({
             ) : (
               <p className="text-sm">Be the first to book your spot</p>
             )}
-            <BookEvent eventId={_id} slug={slug} />
+            <BookEvent eventId={eventId} slug={slug} />
           </div>
         </aside>
       </div>
