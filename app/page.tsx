@@ -7,7 +7,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const Page = async () => {
   const response = await fetch(`${BASE_URL}/api/events`)
   const { events } = await response.json()
-  console.log("server side log")
+  // console.log("server side log")
   return (
     <main>
       <section>
