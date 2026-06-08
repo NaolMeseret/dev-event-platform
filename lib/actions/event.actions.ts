@@ -4,8 +4,12 @@ import connectDB from "../mongodb"
 
 export const getEvents = async () => {
   try {
+    console.log("MONGODB_URI exists:", !!process.env.MONGODB_URI) // 👈 add
+    console.log("Connecting to DB...") // 👈 add
     await connectDB()
+    console.log("Connected! Fetching events...") // 👈 add
     const events = await Event.find().sort({ createdAt: -1 }).lean()
+    console.log("Events found:", events.length) // 👈 add
     return events
   } catch (e) {
     console.error("Error fetching events:", e)
