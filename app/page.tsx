@@ -6,7 +6,7 @@ import { getEvents } from "@/lib/actions/event.actions"
 
 const Page = async () => {
   "use cache"
-  cacheLife("hours")
+  // cacheLife("hours")
   const events = await getEvents()
   // console.log("server side log")
   return (

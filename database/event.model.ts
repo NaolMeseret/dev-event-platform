@@ -73,7 +73,7 @@ const EventSchema = new Schema<IEvent>(
       type: String,
       required: [true, "Mode is required"],
       enum: {
-        values: ["online", "offline", "hybrid"],
+        values: ["online", "offline", "hybrid", "In-Person"],
         message: "Mode must be either online, offline, or hybrid",
       },
     },

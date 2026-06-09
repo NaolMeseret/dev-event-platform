@@ -49,7 +49,7 @@ const EventDetailsPage = async ({
   params: Promise<{ slug: string }>
 }) => {
   "use cache"
-  cacheLife("hours")
+  // cacheLife("hours")
   const { slug } = await params
   const event = await getEventBySlug(slug)
 

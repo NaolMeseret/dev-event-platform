@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
     }
     let tags = JSON.parse(formData.get("tags") as string)
     let agenda = JSON.parse(formData.get("agenda") as string)
+
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
     const uploadResult = await new Promise((resolve, reject) => {

@@ -4,6 +4,7 @@ import "./globals.css"
 import { cn } from "@/lib/utils"
 import LightRays from "@/components/LightRays"
 import NavBar from "@/components/NavBar"
+import Footer from "@/components/Footer"
 import { PostHogProvider } from "@/components/PostHogProvider"
 // import { Suspense } from "react"
 import { PostHogPageView } from "@/components/PostHogPageView"
@@ -67,6 +68,8 @@ export default function RootLayout({
               />
             </div>
             <main>{children}</main>
+
+            <Footer />
           </PostHogProvider>
         </Suspense>
       </body>
