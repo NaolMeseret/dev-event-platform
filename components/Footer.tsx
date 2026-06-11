@@ -38,7 +38,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="#event-card"
+                  href="/create-event"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   Events
