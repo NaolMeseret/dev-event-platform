@@ -13,6 +13,7 @@ export function middleware(req: NextRequest) {
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/bookings") ||
     pathname.startsWith("/profile")
+  // pathname.startsWith("/")
 
   // ── Define auth routes ──
   const isAuthRoute =

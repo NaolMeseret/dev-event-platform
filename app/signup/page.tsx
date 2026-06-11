@@ -126,7 +126,7 @@ export default function SignupPage() {
               A
             </div>
             <div>
-              <p className="text-white text-xs font-medium">Abebe Girma</p>
+              <p className="text-white text-xs font-medium">Naol Meseret</p>
               <p className="text-zinc-500 text-xs">Senior Engineer, Addis</p>
             </div>
           </div>
