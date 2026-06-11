@@ -6,10 +6,11 @@ import LightRays from "@/components/LightRays"
 import NavBar from "@/components/NavBar"
 import Footer from "@/components/Footer"
 import { PostHogProvider } from "@/components/PostHogProvider"
-// import { Suspense } from "react"
 import { PostHogPageView } from "@/components/PostHogPageView"
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
+import { SessionProvider } from "next-auth/react"
 import { Suspense } from "react"
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted-grotesk",
@@ -44,34 +45,33 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <Suspense fallback={null}>
-          <PostHogProvider>
-            {/* <Suspense> */}
-            <PostHogPageView />
-            {/* </Suspense> */}
-            <NavBar />
-            <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
-              <LightRays
-                raysOrigin="top-center-offset"
-                raysColor="#5dfeca"
-                raysSpeed={0.5}
-                lightSpread={0.9}
-                rayLength={1.4}
-                followMouse={true}
-                mouseInfluence={0.02}
-                noiseAmount={0}
-                distortion={0.01}
-                className="custom-rays"
-                pulsating={false}
-                fadeDistance={1}
-                saturation={1}
-              />
-            </div>
-            <main>{children}</main>
-
-            <Footer />
-          </PostHogProvider>
-        </Suspense>
+        <SessionProvider>
+          <Suspense fallback={null}>
+            <PostHogProvider>
+              <PostHogPageView />
+              <NavBar />
+              <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
+                <LightRays
+                  raysOrigin="top-center-offset"
+                  raysColor="#5dfeca"
+                  raysSpeed={0.5}
+                  lightSpread={0.9}
+                  rayLength={1.4}
+                  followMouse={true}
+                  mouseInfluence={0.02}
+                  noiseAmount={0}
+                  distortion={0.01}
+                  className="custom-rays"
+                  pulsating={false}
+                  fadeDistance={1}
+                  saturation={1}
+                />
+              </div>
+              <main>{children}</main>
+              <Footer />
+            </PostHogProvider>
+          </Suspense>
+        </SessionProvider>
       </body>
     </html>
   )
