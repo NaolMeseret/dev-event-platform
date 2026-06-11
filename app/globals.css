@@ -89,7 +89,86 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
+/*
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: relative;
+}
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.desktop-menu a {
+  text-decoration: none;
+}
+
+.desktop-auth {
+  display: flex;
+  align-items: center;
+}
+
+
+.menu-btn {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+.mobile-menu {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .desktop-menu,
+  .desktop-auth {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    padding: 1rem;
+
+    background: #111;
+    border-top: 1px solid #222;
+    z-index: 1000;
+  }
+
+  .mobile-menu a {
+    text-decoration: none;
+  }
+}
+*/
 @utility flex-center {
   @apply flex items-center justify-center;
 }
