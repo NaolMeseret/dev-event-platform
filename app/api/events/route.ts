@@ -1,5 +1,6 @@
 import connectDB from "@/lib/mongodb"
 import { v2 as cloudinary } from "cloudinary"
+import { revalidatePath } from "next/cache"
 import { NextRequest, NextResponse } from "next/server"
 import Event from "@/database/event.model"
 
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     try {
       event = Object.fromEntries(formData.entries())
-    } catch (e) {
+    } catch {
       return NextResponse.json(
         {
           message: "Invalid JSON data format",
@@ -38,8 +39,8 @@ export async function POST(req: NextRequest) {
         },
       )
     }
-    let tags = JSON.parse(formData.get("tags") as string)
-    let agenda = JSON.parse(formData.get("agenda") as string)
+    const tags = JSON.parse(formData.get("tags") as string)
+    const agenda = JSON.parse(formData.get("agenda") as string)
 
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
@@ -65,6 +66,9 @@ export async function POST(req: NextRequest) {
       tags: tags,
       agenda: agenda,
     })
+    revalidatePath("/", "page")
+    revalidatePath(`/events/${createdEvent.slug}`, "page")
+
     return NextResponse.json(
       {
         message: "Event Created Successfully",
